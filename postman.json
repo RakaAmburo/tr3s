@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "ebcb6b99-b71b-451c-8520-917fe45624cc",
+		"name": "Proyecto tr3s",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List Users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsInNjb3BlcyI6IlJPTEVfQURNSU4iLCJpYXQiOjE1Mjk3ODU4NTQsImV4cCI6MTUyOTgwMzg1NH0.zi1-gafXEpZ7M-nIMJHF8N3kAYEwX0C8UHs09AmOm_s"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/users",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b13f8ce9-d0e0-47a8-8bd8-d9da6f285833",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"tresToken\", data.token)"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"username\": \"user1\", \"password\": \"password1\" }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/token/generate-token",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"token",
+						"generate-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 1234"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"username\": \"wally\", \"password\": \"password5\", \"age\": 33, \"salary\": 898999 }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/signup",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Person",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 1234"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \"firstName\" : \"Lady\",  \"lastName\" : \"Gaga\", \"email\" : \"eeee@pepe.com\"}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/people",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"people"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Persons",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tresToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/people",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"people"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
