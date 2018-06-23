@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.tres.config.TokenProvider;
 import com.project.tres.model.AuthToken;
 import com.project.tres.model.LoginUser;
-import com.project.tres.service.UserService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -29,8 +28,8 @@ public class AuthenticationController {
     @Autowired
     private TokenProvider jwtTokenUtil;
 
-    @Autowired
-    private UserService userService;
+    //@Autowired
+    //private UserService userService;
 
     @RequestMapping(value = "/generate-token", method = RequestMethod.POST)
     public ResponseEntity<?> register(@RequestBody LoginUser loginUser) throws AuthenticationException {

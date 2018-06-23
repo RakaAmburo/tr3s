@@ -30,6 +30,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private TokenProvider jwtTokenUtil;
 
+    
+    /* 
+     * Siempre pasa por aca, ver como skipear si no es una url que contenga un token
+     * 
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         String header = req.getHeader(HEADER_STRING);
@@ -38,7 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (header != null && header.startsWith(TOKEN_PREFIX)) {
             authToken = header.replace(TOKEN_PREFIX,"");
             try {
-                username = "pablo";//jwtTokenUtil.getUsernameFromToken(authToken);
+                username = jwtTokenUtil.getUsernameFromToken(authToken);
             } catch (IllegalArgumentException e) {
                 logger.error("an error occured during getting username from token", e);
             } catch (ExpiredJwtException e) {
@@ -48,17 +53,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         } else {
             logger.warn("couldn't find bearer string, will ignore the header");
+            logger.warn(req.getRequestURL().toString());
         }
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
         	Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         	 authorities.add(new SimpleGrantedAuthority("ROLE_" + "ADMIN"));
         	
-            UserDetails userDetails = new org.springframework.security.core.userdetails.User("pablo", "password", authorities);//userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-            //if (jwtTokenUtil.validateToken(authToken, userDetails)) {
-            if (true) {
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, "", authorities);//jwtTokenUtil.getAuthentication(authToken, SecurityContextHolder.getContext().getAuthentication(), userDetails);
+            if (jwtTokenUtil.validateToken(authToken, userDetails)) {
+                UsernamePasswordAuthenticationToken authentication = jwtTokenUtil.getAuthentication(authToken, SecurityContextHolder.getContext().getAuthentication(), userDetails);
                 //UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")));
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
                 logger.info("authenticated user " + username + ", setting security context");
