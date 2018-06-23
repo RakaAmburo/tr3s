@@ -3,6 +3,9 @@ package com.project.tres.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import java.util.Set;
 
 @Entity
@@ -12,6 +15,8 @@ public class User {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
     @Column
+    @NotNull
+    @Size(min=2, message="Name should have atleast 2 characters")
     private String username;
     @Column
     @JsonIgnore
