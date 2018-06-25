@@ -83,7 +83,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Bearer 1234"
+						"value": "Bearer {{tresToken}}"
 					}
 				],
 				"body": {
@@ -111,7 +111,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer 1234"
+						"value": "Bearer {{tresToken}}"
 					},
 					{
 						"key": "Content-Type",
@@ -159,6 +159,63 @@
 					"port": "{{port}}",
 					"path": [
 						"people"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Student",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tresToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"pepe\",\r\n    \"passportNumber\": \"A12345678\"\r\n  }"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/students",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Student",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tresToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/students",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"students"
 					]
 				}
 			},
