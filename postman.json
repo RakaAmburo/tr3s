@@ -12,7 +12,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsInNjb3BlcyI6IlJPTEVfQURNSU4iLCJpYXQiOjE1Mjk3ODU4NTQsImV4cCI6MTUyOTgwMzg1NH0.zi1-gafXEpZ7M-nIMJHF8N3kAYEwX0C8UHs09AmOm_s"
+						"value": "Bearer {{tresToken}}"
 					}
 				],
 				"body": {},
