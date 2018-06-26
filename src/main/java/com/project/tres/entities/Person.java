@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -19,6 +20,8 @@ public class Person {
   @Size(min=2, message="Name should have atleast 2 characters")
   private String firstName;
   private String lastName;
+  @NotNull
+  @Pattern(message = "error.field.email", regexp = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$")
   private String email;
 
   public String getEmail() {

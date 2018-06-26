@@ -11,7 +11,7 @@ public class Student {
   @GeneratedValue
   private Long id;
   
-  @Size(min=2, message="Name should have atleast 2 characters")
+  @Size(min=2, max=20, message="Name should have atleast 2 characters")
   private String name;
   
   private String passportNumber;

@@ -24,62 +24,60 @@ import com.project.tres.entities.FieldValidationResponse;
 import com.project.tres.entities.MessageDTO;
 import com.project.tres.entities.MessageType;
 
-
 @RestControllerAdvice
 public class RestResponseEntityExceptionHandler {
 
-  @Autowired
-  private MessageSource messageSource;
+	@Autowired
+	private MessageSource messageSource;
 
-  @ExceptionHandler(value = {ConstraintViolationException.class})
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
-  @ResponseBody
-  public MessageDTO handleBadInput(ConstraintViolationException ex) {
+	@ExceptionHandler(value = { ConstraintViolationException.class })
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseBody
+	public MessageDTO handleBadInput(ConstraintViolationException ex) {
 
-    Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
+		Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
 
-    return processFieldError(violations);
+		return processFieldError(violations);
 
-  }
+	}
 
-  @ExceptionHandler(value = {TransactionSystemException.class})
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
-  @ResponseBody
-  public MessageDTO handleBadInput2(TransactionSystemException ex) {
+	@ExceptionHandler(value = { TransactionSystemException.class })
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseBody
+	public MessageDTO handleBadInput2(TransactionSystemException ex) {
 
-    Throwable root = ExceptionUtils.getRootCause(ex);
+		Throwable root = ExceptionUtils.getRootCause(ex);
 
-    if (root instanceof ConstraintViolationException) {
-      Set<ConstraintViolation<?>> violations =
-          ((ConstraintViolationException) root).getConstraintViolations();
-      return processFieldError(violations);
-    } else {
+		if (root instanceof ConstraintViolationException) {
+			Set<ConstraintViolation<?>> violations = ((ConstraintViolationException) root).getConstraintViolations();
+			return processFieldError(violations);
+		} else {
 
-      throw ex;
+			throw ex;
 
-    }
+		}
 
-  }
+	}
 
-  private MessageDTO processFieldError(Set<ConstraintViolation<?>> violations) {
-    MessageDTO message = new MessageDTO();
-    List<FieldValidationResponse> items = new LinkedList<>();
-    message.setMessagetype(MessageType.ERROR);
-    message.setMessage("Validation prolbem.");
-    message.setItems(items);
-    Locale currentLocale = LocaleContextHolder.getLocale();
+	private MessageDTO processFieldError(Set<ConstraintViolation<?>> violations) {
+		MessageDTO message = new MessageDTO();
+		List<FieldValidationResponse> items = new LinkedList<>();
+		message.setMessagetype(MessageType.ERROR);
+		message.setMessage("Validation prolbem.");
+		message.setItems(items);
+		Locale currentLocale = LocaleContextHolder.getLocale();
 
-    for (ConstraintViolation<?> constraintViolation : violations) {
-      String template = constraintViolation.getMessageTemplate();
-      String field = constraintViolation.getPropertyPath().toString();
-      String msg = template;//messageSource.getMessage(template, new Object[] {field}, currentLocale);
-      FieldValidationResponse fvr = new FieldValidationResponse();
-      fvr.setField(field);
-      fvr.setMessage(msg);
-      items.add(fvr);
-    }
+		for (ConstraintViolation<?> constraintViolation : violations) {
+			String template = constraintViolation.getMessageTemplate();
+			String field = constraintViolation.getPropertyPath().toString();
+			String msg = messageSource.getMessage(template, new Object[] { field }, currentLocale);
+			FieldValidationResponse fvr = new FieldValidationResponse();
+			fvr.setField(field);
+			fvr.setMessage(msg);
+			items.add(fvr);
+		}
 
-    return message;
-  }
+		return message;
+	}
 
 }

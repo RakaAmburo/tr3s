@@ -16,7 +16,7 @@ public class User {
     private long id;
     @Column
     @NotNull
-    @Size(min=2, message="Name should have atleast 2 characters")
+    @Size(min=2, message="error.field.size")
     private String username;
     @Column
     @JsonIgnore
