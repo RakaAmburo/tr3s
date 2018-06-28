@@ -5,6 +5,7 @@ import com.project.tres.model.User;
 import com.project.tres.model.UserDto;
 import com.project.tres.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.logging.Logger;
 
 
 @Service(value = "userService")
@@ -23,6 +25,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptEncoder;
+	
+	private static final Logger LOGGER = Logger.getLogger(UserServiceImpl.class.getName());
 
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userDao.findByUsername(username);
@@ -59,7 +63,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 	}
 
 	@Override
+	@Cacheable(value = "userbyid", key = "#id")
 	public User findById(Long id) {
+		LOGGER.info("find one user not cached!");
 		return userDao.findById(id).get();
 	}
 

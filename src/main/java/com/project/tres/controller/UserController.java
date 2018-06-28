@@ -32,8 +32,8 @@ public class UserController {
     }
 
     //@Secured("ROLE_USER")
-    @PreAuthorize("hasRole('USER')")
-    ////@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    //@PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
     public User getOne(@PathVariable(value = "id") Long id){
         return userService.findById(id);
