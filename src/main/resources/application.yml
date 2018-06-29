@@ -1,0 +1,6 @@
+# main actuetor endpoints, have to investigate metrics
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics, mappings, beans, scheduledtasks
