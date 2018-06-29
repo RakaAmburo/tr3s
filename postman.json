@@ -17,13 +17,14 @@
 				],
 				"body": {},
 				"url": {
-					"raw": "http://{{ip}}:{{port}}/users",
+					"raw": "http://{{ip}}:{{port}}/tr3s/users",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
+						"tr3s",
 						"users"
 					]
 				}
@@ -58,13 +59,14 @@
 					"raw": "{ \"username\": \"user1\", \"password\": \"password1\" }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{port}}/token/generate-token",
+					"raw": "http://{{ip}}:{{port}}/tr3s/token/generate-token",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
+						"tr3s",
 						"token",
 						"generate-token"
 					]
@@ -91,13 +93,14 @@
 					"raw": "{ \"username\": \"wally\", \"password\": \"password5\", \"age\": 33, \"salary\": 898999 }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{port}}/signup",
+					"raw": "http://{{ip}}:{{port}}/tr3s/signup",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
+						"tr3s",
 						"signup"
 					]
 				}
@@ -120,16 +123,17 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{  \"firstName\" : \"Lady\",  \"lastName\" : \"Gaga\", \"email\" : \"eeee@pepe.com\"}"
+					"raw": "{  \"firstName\" : \"vale\",  \"lastName\" : \"giluna\", \"email\" : \"eeee@pepe.com\"}"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{port}}/people",
+					"raw": "http://{{ip}}:{{port}}/tr3s/people",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
+						"tr3s",
 						"people"
 					]
 				}
@@ -151,13 +155,14 @@
 				],
 				"body": {},
 				"url": {
-					"raw": "http://{{ip}}:{{port}}/people",
+					"raw": "http://{{ip}}:{{port}}/tr3s/people",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
+						"tr3s",
 						"people"
 					]
 				}
@@ -180,16 +185,17 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"pepe\",\r\n    \"passportNumber\": \"A12345678\"\r\n  }"
+					"raw": "{\r\n    \"name\": \"rori\",\r\n    \"passportNumber\": \"A11115678\"\r\n  }"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{port}}/students",
+					"raw": "http://{{ip}}:{{port}}/tr3s/students",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
+						"tr3s",
 						"students"
 					]
 				}
@@ -208,14 +214,42 @@
 				],
 				"body": {},
 				"url": {
-					"raw": "http://{{ip}}:{{port}}/students",
+					"raw": "http://{{ip}}:{{port}}/tr3s/students",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{port}}",
 					"path": [
+						"tr3s",
 						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get One User",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tresToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/tr3s/users/1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"tr3s",
+						"users",
+						"1"
 					]
 				}
 			},
