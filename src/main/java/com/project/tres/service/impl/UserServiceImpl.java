@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 	}
 
 	@Override
-	@Cacheable(value = "userbyid", key = "#id")
+	//@Cacheable(value = "userbyid", key = "#id")
 	public User findById(Long id) {
 		LOGGER.info("find one user not cached!");
 		return userDao.findById(id).get();

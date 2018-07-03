@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.project.tres.entities.ViewProfiles;
 import com.project.tres.model.User;
 import com.project.tres.model.UserDto;
 import com.project.tres.service.UserService;
@@ -24,6 +26,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @JsonView(ViewProfiles.ShowBasic.class)
     //@Secured({"ROLE_ADMIN", "ROLE_USER"})
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value="/users", method = RequestMethod.GET)

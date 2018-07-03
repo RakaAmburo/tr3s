@@ -1,6 +1,8 @@
 package com.project.tres.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.project.tres.entities.ViewProfiles;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,6 +11,7 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
+@JsonView(ViewProfiles.Public.class)
 public class User {
 
     @Id
@@ -26,6 +29,7 @@ public class User {
     @Column
     private int age;
 
+    @JsonView(ViewProfiles.ShowAll.class)
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "USER_ROLES", joinColumns = {
             @JoinColumn(name = "USER_ID") }, inverseJoinColumns = {
