@@ -6,32 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "List Users",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{tresToken}}"
-					}
-				],
-				"body": {},
-				"url": {
-					"raw": "http://{{ip}}:{{port}}/tr3s/users",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{port}}",
-					"path": [
-						"tr3s",
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Generate Token",
 			"event": [
 				{
@@ -75,6 +49,32 @@
 			"response": []
 		},
 		{
+			"name": "List Users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tresToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/tr3s/users",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"tr3s",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Create User",
 			"request": {
 				"method": "POST",
@@ -102,6 +102,62 @@
 					"path": [
 						"tr3s",
 						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get One User",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tresToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/tr3s/users/1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"tr3s",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Persons",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tresToken}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/tr3s/people",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"tr3s",
+						"people"
 					]
 				}
 			},
@@ -141,11 +197,76 @@
 			"response": []
 		},
 		{
-			"name": "List Persons",
+			"name": "Add Tag",
 			"request": {
-				"auth": {
-					"type": "noauth"
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tresToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"tag\":\"fakku\"}"
 				},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/tr3s/tags",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"tr3s",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Relate Tag 2 Person",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{tresToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/uri-list"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "http://192.168.0.26:8095/tr3s/tags/331\nhttp://192.168.0.26:8095/tr3s/tags/332\n\n"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/tr3s/people/33/tags",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"tr3s",
+						"people",
+						"33",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Student",
+			"request": {
 				"method": "GET",
 				"header": [
 					{
@@ -155,7 +276,7 @@
 				],
 				"body": {},
 				"url": {
-					"raw": "http://{{ip}}:{{port}}/tr3s/people",
+					"raw": "http://{{ip}}:{{port}}/tr3s/students",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -163,7 +284,7 @@
 					"port": "{{port}}",
 					"path": [
 						"tr3s",
-						"people"
+						"students"
 					]
 				}
 			},
@@ -203,7 +324,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Student",
+			"name": "Restart App",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -214,7 +335,7 @@
 				],
 				"body": {},
 				"url": {
-					"raw": "http://{{ip}}:{{port}}/tr3s/students",
+					"raw": "http://{{ip}}:{{port}}/tr3s/restart",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -222,34 +343,7 @@
 					"port": "{{port}}",
 					"path": [
 						"tr3s",
-						"students"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get One User",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{tresToken}}"
-					}
-				],
-				"body": {},
-				"url": {
-					"raw": "http://{{ip}}:{{port}}/tr3s/users/1",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{port}}",
-					"path": [
-						"tr3s",
-						"users",
-						"1"
+						"restart"
 					]
 				}
 			},

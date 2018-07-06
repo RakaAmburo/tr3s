@@ -5,7 +5,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.project.tres.entities.PersonTag;
 
-@RepositoryRestResource(collectionResourceRel = "peopleTag", path = "peopleTag")
-public interface PersonTagRepository extends PagingAndSortingRepository<PersonTag, Long>{
+@RepositoryRestResource(collectionResourceRel = "tags", path = "tags")
+public interface PersonTagRepository extends PagingAndSortingRepository<PersonTag, Long> {
 
 }

@@ -9,7 +9,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.project.tres.entities.Person;
 
-//ver projjections?
+//ver projjections? por que hay links repetidos
 
 
 @RepositoryRestResource(collectionResourceRel = "people", path = "people")
