@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 hola sin numero
+=======
+hola
+>>>>>>> feat test
 9
